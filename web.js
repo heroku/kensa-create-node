@@ -1,7 +1,15 @@
 var express = require('express');
 var crypto  = require('crypto');
+var http    = require('http');
 
 var resources = [];
+/*
+var heroku_header = '';
+http.get({ host: "nav.heroku.com", path: "/v1/providers/header", port: 80}, function(res){
+  res.on('data', function(d) { heroku_header = heroku_header + d })
+})
+console.log(heroku_header)
+*/
 
 function get_resource(id) {
  id = parseInt(id)
@@ -42,6 +50,8 @@ function sso_auth (req, res, next) {
   }else{
     var id = req.params.id
   }
+  console.log(id)
+  console.log(req.params)
   var pre_token = id + ':' + process.env.SSO_SALT + ':' + req.param('timestamp')
   var shasum = crypto.createHash('sha1')
   shasum.update(pre_token)
@@ -51,12 +61,11 @@ function sso_auth (req, res, next) {
     return;
   }
   var time = (new Date().getTime() / 1000) - (2 * 60);
-  console.log(req.param('timestamp'))
-  console.log(time)
   if( parseInt(req.param('timestamp')) < time ){
     res.send("Timestamp Expired", 403);
     return;
   }
+  res.cookie('heroku-nav-data', req.param('nav-data'))
   next();
 }
 
