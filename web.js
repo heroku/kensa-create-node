@@ -39,7 +39,7 @@ function basic_auth (req, res, next) {
 var app = express.createServer(express.logger());
 
 app.get('/', function(request, response) {
-    response.send('Hello World!');
+  response.send("hello, world")
 });
 
 app.post('/heroku/resources', express.bodyParser(), basic_auth, function(request, response) {
@@ -64,7 +64,10 @@ app.delete('/heroku/resources/:id', basic_auth, function(request, response) {
 })
 
 app.get('/heroku/resources/:id', function(request, response) {
-
+  console.log(request.params)
+  console.log(request.param('token'))
+  
+  response.redirect("/")
 })
 
 var port = process.env.PORT || 4567;
