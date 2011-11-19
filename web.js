@@ -36,12 +36,15 @@ function basic_auth (req, res, next) {
   res.send('Authentication required', 401);
 }
 
+function sso_auth (req, res, next) {
+  console.log(req.params)
+  console.log(req.param('token'))
+  next();
+}
+
 var app = express.createServer(express.logger());
 
-app.get('/', function(request, response) {
-  response.send("hello, world")
-});
-
+//Provision
 app.post('/heroku/resources', express.bodyParser(), basic_auth, function(request, response) {
   console.log(request.body)
   var resource =  {id : resources.length + 1, plan : request.body.plan }
@@ -49,6 +52,7 @@ app.post('/heroku/resources', express.bodyParser(), basic_auth, function(request
   response.send(resource)
 });
 
+//Plan Change
 app.put('/heroku/resources/:id', express.bodyParser(), basic_auth, function(request, response) {
   console.log(request.body)
   console.log(request.params) 
@@ -57,18 +61,28 @@ app.put('/heroku/resources/:id', express.bodyParser(), basic_auth, function(requ
   response.send("ok")
 })
 
+//Deprovision
 app.delete('/heroku/resources/:id', basic_auth, function(request, response) {
   console.log(request.params)
   destroy_resource(request.params.id)
   response.send("ok")
 })
 
-app.get('/heroku/resources/:id', function(request, response) {
-  console.log(request.params)
-  console.log(request.param('token'))
-  
+//GET SSO
+app.get('/heroku/resources/:id', sso_auth, function(request, response) {
   response.redirect("/")
 })
+
+//POST SSO
+app.post('/sso/login', sso_auth, function(request, response){
+  response.redirect("/")
+})
+
+//SSO LANDING PAGE
+app.get('/', function(request, response) {
+  response.send("hello, world")
+});
+
 
 var port = process.env.PORT || 4567;
 app.listen(port, function() {
