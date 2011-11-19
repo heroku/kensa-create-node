@@ -1,5 +1,5 @@
 var express = require('express');
-var Crypto  = require('crypto');
+var crypto  = require('crypto');
 
 var resources = [];
 
@@ -37,8 +37,26 @@ function basic_auth (req, res, next) {
 }
 
 function sso_auth (req, res, next) {
-  console.log(req.params)
-  console.log(req.param('token'))
+  if(req.params.length == 0){
+    var id = req.param('id')
+  }else{
+    var id = req.params.id
+  }
+  var pre_token = id + ':' + process.env.SSO_SALT + ':' + req.param('timestamp')
+  var shasum = crypto.createHash('sha1')
+  shasum.update(pre_token)
+  var token = shasum.digest('hex')
+  if( req.param('token') != token){
+    res.send("Token Mismatch", 403);
+    return;
+  }
+  var time = (new Date().getTime() / 1000) - (2 * 60);
+  console.log(req.param('timestamp'))
+  console.log(time)
+  if( parseInt(req.param('timestamp')) < time ){
+    res.send("Timestamp Expired", 403);
+    return;
+  }
   next();
 }
 
@@ -74,7 +92,7 @@ app.get('/heroku/resources/:id', sso_auth, function(request, response) {
 })
 
 //POST SSO
-app.post('/sso/login', sso_auth, function(request, response){
+app.post('/sso/login', express.bodyParser(), sso_auth, function(request, response){
   response.redirect("/")
 })
 
@@ -86,6 +104,6 @@ app.get('/', function(request, response) {
 
 var port = process.env.PORT || 4567;
 app.listen(port, function() {
-    console.log("Listening on " + port);
+  console.log("Listening on " + port);
 });
 
