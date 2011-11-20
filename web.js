@@ -1,6 +1,7 @@
 var express = require('express');
 var crypto  = require('crypto');
 var http    = require('http');
+var fs      = require('fs');
 
 var resources = [];
 /*
@@ -107,7 +108,7 @@ app.post('/sso/login', express.bodyParser(), sso_auth, function(request, respons
 
 //SSO LANDING PAGE
 app.get('/', function(request, response) {
-  response.send("hello, world")
+  response.render('index.ejs', {layout: false})
 });
 
 

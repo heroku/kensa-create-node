@@ -1,0 +1,181 @@
+<div id="heroku-header">
+  <h5 id="heroku-logo"><a href="http://heroku.com">Heroku</a></h5>
+  <ul id="heroku-account-nav">
+    <li><a href="https://api.heroku.com/myapps">My Apps</a></li>
+    <li><a href="https://api.heroku.com/account">My Account</a></li>
+    <li><a href="https://api.heroku.com/logout">Logout</a></li>
+  </ul>
+  <ul id='heroku-section-nav'>
+    <li><a href="http://heroku.com/how">How it Works</a></li>
+    <li><a href="http://heroku.com/pricing">Pricing</a></li>
+    <li><a href="http://addons.heroku.com/">Add-ons</a></li>
+    <li><a href="http://devcenter.heroku.com/">Dev Center</a></li>
+    <li><a href="https://api.heroku.com/helpdesk/login">Support</a></li>
+  </ul>
+</div>
+
+<div id="heroku-subheader">
+  <div id="heroku-subheader-shadow"></div>
+  <div class="heroku-app">
+    <h1 id="heroku-appname">&nbsp;</h1>
+  </div>
+
+  <ul class="heroku-submenu">
+    <li><a href="https://api.heroku.com/myapps/" id="heroku-app-info">General Info</a></li>
+    <li><a href="https://api.heroku.com/myapps/" id="heroku-app-resources">Resources</a></li>
+  </ul>
+
+  <div id="heroku-addons-button" class="heroku-button-current">
+    <a href='#' id="heroku-addons-button-toggle">Add-ons</a>
+  </div>
+
+  <div id="heroku-addons-menu">
+    <div class='heroku-addons-container'>
+      <div class='heroku-addons-shadow'></div>
+      <div id="heroku-addons-menu-addons"></div>
+
+      <a class='getmore' href='http://addons.heroku.com/'>
+        <span>Get More Add-ons...</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div id="heroku-addons-overlay"></div>
+
+<script type="text/javascript">
+if(!this.JSON){this.JSON={};}
+(function(){function f(n){return n<10?'0'+n:n;}
+if(typeof Date.prototype.toJSON!=='function'){Date.prototype.toJSON=function(key){return isFinite(this.valueOf())?this.getUTCFullYear()+'-'+
+f(this.getUTCMonth()+1)+'-'+
+f(this.getUTCDate())+'T'+
+f(this.getUTCHours())+':'+
+f(this.getUTCMinutes())+':'+
+f(this.getUTCSeconds())+'Z':null;};String.prototype.toJSON=Number.prototype.toJSON=Boolean.prototype.toJSON=function(key){return this.valueOf();};}
+var cx=/[\u0000\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,escapable=/[\\\"\x00-\x1f\x7f-\x9f\u00ad\u0600-\u0604\u070f\u17b4\u17b5\u200c-\u200f\u2028-\u202f\u2060-\u206f\ufeff\ufff0-\uffff]/g,gap,indent,meta={'\b':'\\b','\t':'\\t','\n':'\\n','\f':'\\f','\r':'\\r','"':'\\"','\\':'\\\\'},rep;function quote(string){escapable.lastIndex=0;return escapable.test(string)?'"'+string.replace(escapable,function(a){var c=meta[a];return typeof c==='string'?c:'\\u'+('0000'+a.charCodeAt(0).toString(16)).slice(-4);})+'"':'"'+string+'"';}
+function str(key,holder){var i,k,v,length,mind=gap,partial,value=holder[key];if(value&&typeof value==='object'&&typeof value.toJSON==='function'){value=value.toJSON(key);}
+if(typeof rep==='function'){value=rep.call(holder,key,value);}
+switch(typeof value){case'string':return quote(value);case'number':return isFinite(value)?String(value):'null';case'boolean':case'null':return String(value);case'object':if(!value){return'null';}
+gap+=indent;partial=[];if(Object.prototype.toString.apply(value)==='[object Array]'){length=value.length;for(i=0;i<length;i+=1){partial[i]=str(i,value)||'null';}
+v=partial.length===0?'[]':gap?'[\n'+gap+
+partial.join(',\n'+gap)+'\n'+
+mind+']':'['+partial.join(',')+']';gap=mind;return v;}
+if(rep&&typeof rep==='object'){length=rep.length;for(i=0;i<length;i+=1){k=rep[i];if(typeof k==='string'){v=str(k,value);if(v){partial.push(quote(k)+(gap?': ':':')+v);}}}}else{for(k in value){if(Object.hasOwnProperty.call(value,k)){v=str(k,value);if(v){partial.push(quote(k)+(gap?': ':':')+v);}}}}
+v=partial.length===0?'{}':gap?'{\n'+gap+partial.join(',\n'+gap)+'\n'+
+mind+'}':'{'+partial.join(',')+'}';gap=mind;return v;}}
+if(typeof JSON.stringify!=='function'){JSON.stringify=function(value,replacer,space){var i;gap='';indent='';if(typeof space==='number'){for(i=0;i<space;i+=1){indent+=' ';}}else if(typeof space==='string'){indent=space;}
+rep=replacer;if(replacer&&typeof replacer!=='function'&&(typeof replacer!=='object'||typeof replacer.length!=='number')){throw new Error('JSON.stringify');}
+return str('',{'':value});};}
+if(typeof JSON.parse!=='function'){JSON.parse=function(text,reviver){var j;function walk(holder,key){var k,v,value=holder[key];if(value&&typeof value==='object'){for(k in value){if(Object.hasOwnProperty.call(value,k)){v=walk(value,k);if(v!==undefined){value[k]=v;}else{delete value[k];}}}}
+return reviver.call(holder,key,value);}
+text=String(text);cx.lastIndex=0;if(cx.test(text)){text=text.replace(cx,function(a){return'\\u'+
+('0000'+a.charCodeAt(0).toString(16)).slice(-4);});}
+if(/^[\],:{}\s]*$/.test(text.replace(/\\(?:["\\\/bfnrt]|u[0-9a-fA-F]{4})/g,'@').replace(/"[^"\\\n\r]*"|true|false|null|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?/g,']').replace(/(?:^|:|,)(?:\s*\[)+/g,''))){j=eval('('+text+')');return typeof reviver==='function'?walk({'':j},''):j;}
+throw new SyntaxError('JSON.parse');};}}());var HerokuNav={readCookie:function(){var nameEQ="heroku-nav-data=";var ca=document.cookie.split(';');for(var i=0;i<ca.length;i++){var c=ca[i];while(c.charAt(0)==' ')c=c.substring(1,c.length);if(c.indexOf(nameEQ)==0)return c.substring(nameEQ.length,c.length);}
+return null;},_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_=",decodeBase64Params:function(input){var output="";var chr1,chr2,chr3;var enc1,enc2,enc3,enc4;var i=0;input=input.replace(/[^A-Za-z0-9\+\/\=]/g,"");while(i<input.length){enc1=this._keyStr.indexOf(input.charAt(i++)||'=');enc2=this._keyStr.indexOf(input.charAt(i++)||'=');enc3=this._keyStr.indexOf(input.charAt(i++)||'=');enc4=this._keyStr.indexOf(input.charAt(i++)||'=');chr1=(enc1<<2)|(enc2>>4);chr2=((enc2&15)<<4)|(enc3>>2);chr3=((enc3&3)<<6)|enc4;output=output+String.fromCharCode(chr1);if(enc3!=64){output=output+String.fromCharCode(chr2);}
+if(enc4!=64){output=output+String.fromCharCode(chr3);}}
+return output;},openAddons:function(e){HerokuNav.animationSpeed=HerokuNav.animationDelta;HerokuNav.addonsHeight=0;HerokuNav.overlayOpacity=0;HerokuNav.draw();document.getElementById('heroku-addons-overlay').style.height=window.innerHeight-147+'px';document.getElementById('heroku-addons-overlay').style.display='block';document.getElementById('heroku-addons-button-toggle').onclick=HerokuNav.closeAddons;document.getElementById('heroku-addons-button').className='heroku-button-current heroku-button-active';HerokuNav.addonsOpen=true;HerokuNav.addonsAnimationHandler=setInterval(HerokuNav.animateAddons,13);return HerokuNav.stopEvent(e);},closeAddons:function(e){HerokuNav.animationSpeed=HerokuNav.animationDelta;document.getElementById('heroku-addons-button-toggle').onclick=HerokuNav.openAddons;document.getElementById('heroku-addons-button').className='heroku-button-current';HerokuNav.addonsOpen=false;HerokuNav.addonsAnimationHandler=setInterval(HerokuNav.animateAddons,13);return HerokuNav.stopEvent(e);},stopEvent:function(e){if(!e)var e=window.event;e.cancelBubble=true;if(e.stopPropagation)e.stopPropagation();return false;},animateAddons:function(){function run(step,boundary){gt=(step==1);newPos=HerokuNav.addonsHeight+(HerokuNav.animationSpeed*step);if((gt&&newPos>=boundary)||(!gt&&newPos<=boundary)){HerokuNav.addonsHeight=boundary;HerokuNav.overlayOpacity=HerokuNav.calcOverlay(boundary);clearInterval(HerokuNav.addonsAnimationHandler);}
+else{HerokuNav.addonsHeight=newPos;HerokuNav.overlayOpacity=HerokuNav.calcOverlay(newPos);}
+HerokuNav.draw();if(HerokuNav.animationSpeed>14)
+HerokuNav.animationSpeed-=4;}
+if(HerokuNav.addonsOpen){run(1,HerokuNav.addonsHeightOriginal);}
+else{run(-1,0);}},calcOverlay:function(pos){return(pos*0.8)/HerokuNav.addonsHeightOriginal;},draw:function(){document.getElementById('heroku-addons-menu').style.height=HerokuNav.addonsHeight+'px';document.getElementById('heroku-addons-overlay').style.opacity=HerokuNav.overlayOpacity;if(HerokuNav.overlayOpacity==0)
+document.getElementById('heroku-addons-overlay').style.display='none';},init:function(){this.addonsOpen=false;this.addonsAnimationHandler=null;document.getElementById('heroku-addons-menu').style.width='500px';var raw=this.decodeBase64Params(this.readCookie());var attrs=JSON.parse(raw);document.getElementById('heroku-appname').innerHTML=attrs.appname;document.getElementById('heroku-addons-button-toggle').innerHTML=attrs.addon;document.getElementById('heroku-app-info').href+=attrs.appname;document.getElementById('heroku-app-resources').href+=attrs.appname+'/resources';html='';for(i=0;i<attrs.addons.length;i++){addon=attrs.addons[i];icon=addon.icon||'http://api.heroku.com/images/addons/addon-icon-default-25x25.png';cssclass='addon installed';if(addon.current)cssclass+=' current';if(addon.state=='notconfigured')cssclass+=' notconfigured';html+='<p class="'+cssclass+'"><a href="http://api.heroku.com/myapps/'+attrs.appname+'/addons/'+addon.slug+'" style="background-image:url('+icon+')">'+addon.name+'</a>';if(addon.state=='notconfigured')html+='<span>Not Configured</span>';html+='</p>';}
+document.getElementById('heroku-addons-menu-addons').innerHTML=html;this.addonsHeightOriginal=attrs.addons.length*47+85;this.animationDelta=this.addonsHeightOriginal/(0.46*13);document.getElementById('heroku-addons-button-toggle').onclick=HerokuNav.openAddons;var old=(document.onclick)?document.onclick:function(){};document.onclick=function(e){old();if(HerokuNav.addonsOpen)
+HerokuNav.closeAddons(e);};}}
+HerokuNav.init();
+</script>
+
+<style type="text/css">
+#heroku-header { overflow: hidden; display: inline-block; margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: arial, helvetica, sans-serif; vertical-align: baseline; min-width: 1044px; background-color: #29264d; border-bottom-style: solid; border-bottom-width: 3px; border-bottom-color: #494573; height: 93px; }
+#heroku-header { display: block; }
+#heroku-header div, #heroku-header span, #heroku-header object, #heroku-header iframe, #heroku-header h1, #heroku-header h2, #heroku-header h3, #heroku-header h4, #heroku-header h5, #heroku-header h6, #heroku-header p, #heroku-header pre, #heroku-header a, #heroku-header abbr, #heroku-header acronym, #heroku-header address, #heroku-header code, #heroku-header del, #heroku-header dfn, #heroku-header em, #heroku-header img, #heroku-header dl, #heroku-header dt, #heroku-header dd, #heroku-header ol, #heroku-header ul, #heroku-header li, #heroku-header fieldset, #heroku-header form, #heroku-header input, #heroku-header label, #heroku-header legend, #heroku-header caption, #heroku-header tbody, #heroku-header tfoot, #heroku-header thead, #heroku-header tr { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: arial, helvetica, sans-serif; vertical-align: baseline; }
+#heroku-header blockquote, #heroku-header q { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: arial, helvetica, sans-serif; vertical-align: baseline; quotes: "" ""; }
+#heroku-header blockquote:before, #heroku-header blockquote:after, #heroku-header q:before, #heroku-header q:after { content: ""; }
+#heroku-header th, #heroku-header td, #heroku-header caption { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: arial, helvetica, sans-serif; vertical-align: baseline; text-align: left; font-weight: normal; vertical-align: middle; }
+#heroku-header table { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: arial, helvetica, sans-serif; vertical-align: baseline; border-collapse: separate; border-spacing: 0; vertical-align: middle; }
+#heroku-header a img { border: none; }
+#heroku-header li { list-style-type: none; }
+#heroku-header *:focus { outline: 0; }
+#heroku-header #heroku-logo { margin: 20px 0 15px 25px; float: left; }
+#heroku-header #heroku-logo a { display: block; text-indent: -9999px; width: 177px; height: 56px; overflow: hidden; background-image: url(https://nav.heroku.com/images/logos/logo.png); background-repeat: no-repeat; }
+#heroku-header ul#heroku-account-nav, #heroku-header ul#heroku-section-nav { list-style-type: none; overflow: hidden; display: inline-block; float: right; margin-top: 30px; padding: 10px; }
+#heroku-header ul#heroku-account-nav, #heroku-header ul#heroku-section-nav { display: block; }
+#heroku-header ul#heroku-account-nav li, #heroku-header ul#heroku-section-nav li { float: left; margin-left: 10px; }
+#heroku-header ul#heroku-account-nav li:first-child, #heroku-header ul#heroku-section-nav li:first-child { margin-left: 0; }
+#heroku-header ul#heroku-account-nav li, #heroku-header ul#heroku-section-nav li { border-left-style: solid; border-left-width: 2px; border-left-color: #494573; padding-left: 10px; font-size: 16px; }
+#heroku-header ul#heroku-account-nav li:first-child, #heroku-header ul#heroku-section-nav li:first-child { border-left: none; padding-left: 0; }
+#heroku-header ul#heroku-account-nav li#heroku-header-link-login, #heroku-header ul#heroku-section-nav li#heroku-header-link-login { border: none; margin-left: 0; padding-left: 0; }
+#heroku-header ul#heroku-account-nav li a, #heroku-header ul#heroku-section-nav li a { color: #c9c3e6; text-decoration: none; font-weight: normal; }
+#heroku-header ul#heroku-account-nav li a:hover, #heroku-header ul#heroku-section-nav li a:hover { color: white; }
+#heroku-header ul#heroku-account-nav li a.active, #heroku-header ul#heroku-section-nav li a.active { color: #bff740; }
+#heroku-header ul#heroku-account-nav li a.active:hover, #heroku-header ul#heroku-section-nav li a.active:hover { color: #bff740; }
+#heroku-header ul#heroku-account-nav { background-color: #231d40; padding-left: 15px; padding-right: 15px; margin-right: 25px; margin-left: 10px; -moz-border-radius: 7px; -webkit-border-radius: 7px; }
+#heroku-header ul#heroku-account-nav li a { color: #45a4ff; }
+#heroku-header ul#heroku-account-nav li a:hover { color: #74d0f4; }
+#heroku-header ul#heroku-account-nav li a.active { color: #bff740; }
+#heroku-header ul#heroku-account-nav li a.active:hover { color: #bff740; }
+#heroku-subheader { height: 51px; font-face: arial, sans-serif; font-size: 14px; background-color: #1f2028; position: relative; }
+#heroku-subheader div, #heroku-subheader span, #heroku-subheader object, #heroku-subheader iframe, #heroku-subheader h1, #heroku-subheader h2, #heroku-subheader h3, #heroku-subheader h4, #heroku-subheader h5, #heroku-subheader h6, #heroku-subheader p, #heroku-subheader pre, #heroku-subheader a, #heroku-subheader abbr, #heroku-subheader acronym, #heroku-subheader address, #heroku-subheader code, #heroku-subheader del, #heroku-subheader dfn, #heroku-subheader em, #heroku-subheader img, #heroku-subheader dl, #heroku-subheader dt, #heroku-subheader dd, #heroku-subheader ol, #heroku-subheader ul, #heroku-subheader li, #heroku-subheader fieldset, #heroku-subheader form, #heroku-subheader input, #heroku-subheader label, #heroku-subheader legend, #heroku-subheader caption, #heroku-subheader tbody, #heroku-subheader tfoot, #heroku-subheader thead, #heroku-subheader tr { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: arial, helvetica, sans-serif; vertical-align: baseline; }
+#heroku-subheader blockquote, #heroku-subheader q { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: arial, helvetica, sans-serif; vertical-align: baseline; quotes: "" ""; }
+#heroku-subheader blockquote:before, #heroku-subheader blockquote:after, #heroku-subheader q:before, #heroku-subheader q:after { content: ""; }
+#heroku-subheader th, #heroku-subheader td, #heroku-subheader caption { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: arial, helvetica, sans-serif; vertical-align: baseline; text-align: left; font-weight: normal; vertical-align: middle; }
+#heroku-subheader table { margin: 0; padding: 0; border: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: arial, helvetica, sans-serif; vertical-align: baseline; border-collapse: separate; border-spacing: 0; vertical-align: middle; }
+#heroku-subheader a img { border: none; }
+#heroku-subheader li { list-style-type: none; }
+#heroku-subheader *:focus { outline: 0; }
+#heroku-subheader #heroku-subheader-shadow { width: 100%; position: absolute; height: 10px; top: 0; left: 0; z-index: 15000; background-image: url(https://nav.heroku.com/images/v1/addon-menu-shadow.png); background-repeat: repeat-x; background-position: center top; opacity: 0.4; }
+#heroku-subheader .heroku-app { float: left; background: url(https://nav.heroku.com/images/v1/subheader_triangle.png) top right no-repeat; padding-right: 26px; height: 49px; margin-right: 22px; }
+#heroku-subheader .heroku-app h1 { display: block; height: 37px; color: #cccccc; font-size: 20px; background-color: #191a20; padding: 14px 36px 0 32px; margin: 0; font-weight: bold; }
+#heroku-subheader .heroku-app h1 a { color: #cccccc; }
+#heroku-subheader .heroku-submenu { list-style: none; margin: 0; }
+#heroku-subheader .heroku-submenu li { margin-top: 13px; float: left; height: 30px; padding-left: 16px; margin-right: 10px; }
+#heroku-subheader .heroku-submenu li a { display: block; color: gray; padding: 5px 20px 0 4px; height: 100%; text-decoration: none; }
+#heroku-subheader .heroku-submenu li a:hover { color: white; }
+#heroku-subheader .heroku-submenu li.active { background: url(https://nav.heroku.com/images/v1/subheader_selection_left.png) no-repeat; }
+#heroku-subheader .heroku-submenu li.active a { color: white; background: url(https://nav.heroku.com/images/v1/subheader_selection_bg.png) top right no-repeat; }
+#heroku-subheader #heroku-addons-button { float: right; display: block; font-size: 14px; padding: 0; margin-top: 12px; margin-right: 25px; -moz-border-radius: 14px; -webkit-border-radius: 14px; background-color: #33313b; background-image: url(https://nav.heroku.com/images/v1/addon-menu-trigger-background.png); background-position: center 0; background-repeat: repeat-x; -moz-box-shadow: 0px 0px 3px #1a1a1a; -webkit-box-shadow: 0px 0px 3px #1a1a1a; }
+#heroku-subheader #heroku-addons-button a { display: inline-block; color: #cccccc; text-decoration: none; padding: 5px 40px 5px 20px; background-image: url(https://nav.heroku.com/images/v1/addon-menu-trigger-arrow.png); background-position: right 3px; background-repeat: no-repeat; }
+#heroku-subheader #heroku-addons-button a:hover { color: white; text-decoration: none; background-position: right -28px; }
+#heroku-subheader #heroku-addons-button.heroku-button-active { background-color: #393342; background-position: center -28px; }
+#heroku-subheader #heroku-addons-button.heroku-button-active a { color: #d6ceff; background-position: right -58px; }
+#heroku-subheader #heroku-addons-button.heroku-button-current { background-image: url(https://nav.heroku.com/images/v1/addon-menu-trigger-background-current.png); background-position: right 0; background-repeat: no-repeat; background-color: #383842; color: white; }
+#heroku-subheader #heroku-addons-button.heroku-button-current a { padding: 5px 60px 5px 20px; color: #bee46d; }
+#heroku-subheader #heroku-addons-button.heroku-button-current a:hover { color: #f1fdc9; }
+#heroku-subheader #heroku-addons-button.heroku-button-current.heroku-button-active { background-position: right -26px; }
+#heroku-subheader #heroku-addons-button.heroku-button-current.heroku-button-active a { color: #d6ceff; }
+#heroku-subheader #heroku-addons-menu { position: absolute; right: 0; z-index: 1000; margin-top: 49px; overflow: hidden; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container { position: absolute; bottom: 10px; right: 0; margin-right: 25px; margin-left: 15px; -moz-box-shadow: 0px 0px 12px black; -webkit-box-shadow: 0px 0px 12px black; -moz-border-radius-bottomright: 14px; -webkit-border-bottom-right-radius: 14px; -moz-border-radius-bottomleft: 14px; -webkit-border-bottom-left-radius: 14px; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container .heroku-addons-shadow { width: 100%; position: absolute; height: 10px; top: 0; left: 0; z-index: 15000; background-image: url(https://nav.heroku.com/images/v1/addon-menu-shadow.png); background-repeat: repeat-x; background-position: center top; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons { padding: 13px 10px 10px 10px; border-right: 1px solid #504e59; border-left: 1px solid #504e59; background-color: #32313a; background-image: url(https://nav.heroku.com/images/v1/addon-menu-background.png); background-repeat: repeat-x; background-position: right top; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons p { padding: 10px; color: #e6e6e6; margin-bottom: 2px; white-space: nowrap; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .none { text-align: center; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon { overflow: hidden; position: relative; vertical-align: bottom; -moz-border-radius: 5px; -webkit-border-radius: 5px; cursor: pointer; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon a, #heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon span { display: block; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon a { color: #d6ceff; text-decoration: none; padding-left: 30px; margin-right: 9em; background-repeat: no-repeat; background-position: left 0; line-height: 25px; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon span { position: absolute; top: 18px; right: 10px; text-align: right; padding-top: 1px; width: 12em; font-size: 10px; line-height: 9px; text-transform: uppercase; color: #c2bfe4; display: inline-block; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon span:after { content: " "; display: block; height: 0; clear: both; overflow: hidden; visibility: hidden; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon span { display: block; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon:hover { background-color: #4a455a; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon:hover a { background-position: left -25px; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon:hover a, #heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon:hover span { color: #e9e6fe; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.installing { background-color: #434755; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.installing a { color: #cce8ff; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.installing span { color: #82a7c5; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.installing:hover { background-color: #434755; cursor: default; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.installing:hover a { color: #cce8ff; cursor: default; background-position: left 0; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.notconfigured { color: #777777; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.notconfigured a { background-position: left -50px; color: #777777; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.notconfigured span { background-image: url(https://nav.heroku.com/images/v1/addon-menu-configure-arrow.png); background-repeat: no-repeat; background-position: right 0; padding-right: 24px; color: #777777; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.notconfigured:hover a { background-position: left -25px; color: #dddddd; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.notconfigured:hover span { color: #dddddd; background-position: right -15px; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.current a { color: #bee46d; background-position: left -26px; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container #heroku-addons-menu-addons .addon.current:hover a { color: #f1fdc9; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container .getmore { display: block; padding: 10px; font-size: 14px; background-image: url(https://nav.heroku.com/images/v1/addon-menu-getmore-background.png); background-repeat: repeat-x; background-position: center top; background-color: #32303a; border: 1px solid #504e59; -moz-border-radius-bottomright: 13px; -webkit-border-bottom-right-radius: 13px; -moz-border-radius-bottomleft: 13px; -webkit-border-bottom-left-radius: 13px; text-decoration: none; color: #d6ceff; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container .getmore span { padding-left: 37px; padding-right: 15px; background-image: url(https://nav.heroku.com/images/v1/addon-menu-getmore-button.png); background-repeat: no-repeat; background-position: left -6px; line-height: 30px; display: inline-block; white-space: nowrap; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container .getmore:hover { background-image: url(https://nav.heroku.com/images/v1/addon-menu-getmore-background-hover.png); background-color: #24373a; border: 1px solid #345356; color: #cce8ff; }
+#heroku-subheader #heroku-addons-menu .heroku-addons-container .getmore:hover span { background-position: left -42px; }
+
+#heroku-addons-overlay { opacity: 0.8; position: absolute; z-index: 10; width: 100%; height: 100%; background-color: #191a20; display: none; }
+
+</style>
