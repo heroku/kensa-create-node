@@ -85,6 +85,10 @@ app.put('/heroku/resources/:id', express.bodyParser(), basic_auth, function(requ
   console.log(request.body)
   console.log(request.params) 
   var resource =  get_resource(request.params.id)
+  if(!resource){
+    response.send("Not found", 404);
+    return;
+  }
   resource.plan = request.body.plan
   response.send("ok")
 })
@@ -92,6 +96,10 @@ app.put('/heroku/resources/:id', express.bodyParser(), basic_auth, function(requ
 //Deprovision
 app.delete('/heroku/resources/:id', basic_auth, function(request, response) {
   console.log(request.params)
+  if(!get_resource(request.params.id)){
+    response.send("Not found", 404);
+    return;
+  }
   destroy_resource(request.params.id)
   response.send("ok")
 })
@@ -109,12 +117,12 @@ app.post('/sso/login', express.bodyParser(), sso_auth, function(request, respons
 //SSO LANDING PAGE
 app.get('/', function(request, response) {
   if(request.session.resource){
-    response.render('index.ejs', {layout: false, resource: request.session.resource, email: request.session.email })
+    response.render('index.ejs', {layout: false, 
+      resource: request.session.resource, email: request.session.email })
   }else{
     response.send("Not found", 404);
   }
 });
-
 
 var port = process.env.PORT || 4567;
 app.listen(port, function() {
