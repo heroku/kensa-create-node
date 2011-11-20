@@ -1,6 +1,6 @@
 ## `kensa create my_addon --template node`
 
-this repository is a sinatra template application for use with the 
+this repository is a node.js/express template application for use with the 
 Heroku <a href="http://github.com/heroku/kensa">kensa</a> gem
 
 clone it via:
