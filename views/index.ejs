@@ -2,6 +2,10 @@
 <html>
 <body>
   <%- partial('header.ejs') %>
-  hello
+  <p>
+  hello, resource: <%= resource.id %><br/>
+  You are on plan: <%= resource.plan %><br/>
+  You logged in as: <%= email %> 
+  </p>
 </body>
 </html>

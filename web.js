@@ -45,12 +45,16 @@ function basic_auth (req, res, next) {
   res.send('Authentication required', 401);
 }
 
-function sso_auth (req, res, next) {
+function get_id(req){
   if(req.params.length == 0){
-    var id = req.param('id')
+    return req.param('id');
   }else{
-    var id = req.params.id
+    return req.params.id;
   }
+}
+
+function sso_auth (req, res, next) {
+  var id = get_id(req)
   console.log(id)
   console.log(req.params)
   var pre_token = id + ':' + process.env.SSO_SALT + ':' + req.param('timestamp')
@@ -67,10 +71,17 @@ function sso_auth (req, res, next) {
     return;
   }
   res.cookie('heroku-nav-data', req.param('nav-data'))
+  req.session.resource = get_resource(id)
+  req.session.email = req.param('email')
   next();
 }
 
 var app = express.createServer(express.logger());
+
+app.configure(function(){
+  app.use(express.cookieParser());
+  app.use(express.session({ secret: process.env.SSO_SALT }));
+})
 
 //Provision
 app.post('/heroku/resources', express.bodyParser(), basic_auth, function(request, response) {
@@ -108,7 +119,11 @@ app.post('/sso/login', express.bodyParser(), sso_auth, function(request, respons
 
 //SSO LANDING PAGE
 app.get('/', function(request, response) {
-  response.render('index.ejs', {layout: false})
+  if(request.session.resource){
+    response.render('index.ejs', {layout: false, resource: request.session.resource, email: request.session.email })
+  }else{
+    response.send("Not found", 404);
+  }
 });
 
 
