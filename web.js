@@ -4,13 +4,6 @@ var http    = require('http');
 var fs      = require('fs');
 
 var resources = [];
-/*
-var heroku_header = '';
-http.get({ host: "nav.heroku.com", path: "/v1/providers/header", port: 80}, function(res){
-  res.on('data', function(d) { heroku_header = heroku_header + d })
-})
-console.log(heroku_header)
-*/
 
 function get_resource(id) {
  id = parseInt(id)
@@ -45,16 +38,12 @@ function basic_auth (req, res, next) {
   res.send('Authentication required', 401);
 }
 
-function get_id(req){
-  if(req.params.length == 0){
-    return req.param('id');
-  }else{
-    return req.params.id;
-  }
-}
-
 function sso_auth (req, res, next) {
-  var id = get_id(req)
+  if(req.params.length == 0){
+    var id = req.param('id');
+  }else{
+    var id = req.params.id;
+  }
   console.log(id)
   console.log(req.params)
   var pre_token = id + ':' + process.env.SSO_SALT + ':' + req.param('timestamp')
