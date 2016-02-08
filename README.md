@@ -7,6 +7,8 @@ This tool is deprecated. Please follow [this guide](https://devcenter.heroku.com
 this repository is a node.js/express template application for use with the 
 Heroku <a href="http://github.com/heroku/kensa">kensa</a> gem
 
+You can find a node.js/hapi template implementation here: <a href="https://github.com/KevinGrandon/kensa-create-node-hapi">kensa-create-node-hapi</a>
+
 dependencies:
 
     > gem install kensa
