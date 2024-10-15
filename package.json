@@ -2,7 +2,7 @@
   "name": "node-example",
   "version": "0.0.1",
   "dependencies": {
-    "express": "2.4.5",
+    "express": "4.20.0",
     "ejs" : "0.4.3"
   }
 }
